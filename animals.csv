@@ -1,0 +1,21 @@
+name,species,animal_type,diet,extra
+Lion,Panthera leo,Mammal,Carnivore,Short Fur
+Elephant,Loxodonta africana,Mammal,Herbivore,Thick Skin
+Tiger,Panthera tigris,Mammal,Carnivore,Striped Fur
+Kangaroo,Macropus,Mammal,Herbivore,Strong Legs
+Dolphin,Delphinidae,Mammal,Carnivore,Smooth Skin
+Cobra,Naja,Reptile,Carnivore,True
+Turtle,Testudines,Reptile,Herbivore,False
+Alligator,Alligator mississippiensis,Reptile,Carnivore,False
+Parrot,Psittaciformes,Bird,Herbivore,Colorful Feathers
+Eagle,Aquila,Bird,Carnivore,Sharp Beak
+Penguin,Spheniscidae,Bird,Carnivore,Swims Well
+Shark,Carcharodon carcharias,Fish,Carnivore,Sharp Teeth
+Goldfish,Carassius auratus,Fish,Herbivore,Small Size
+Frog,Anura,Amphibian,Carnivore,Webbed Feet
+Salamander,Caudata,Amphibian,Carnivore,Smooth Skin
+Wolf,Canis lupus,Mammal,Carnivore,Thick Fur
+Giraffe,Giraffa camelopardalis,Mammal,Herbivore,Long Neck
+Cheetah,Acinonyx jubatus,Mammal,Carnivore,Spotted Fur
+Ostrich,Struthio camelus,Bird,Herbivore,Fast Runner
+Komodo Dragon,Varanus komodoensis,Reptile,Carnivore,True
