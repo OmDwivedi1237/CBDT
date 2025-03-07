@@ -1,28 +1,51 @@
 import tkinter as tk
 from tkinter import messagebox
+import matplotlib.pyplot as plt
+import networkx as nx
 from .binary_tree import AnimalTree
-from .data_loader import DataLoader
 
-class AnimalOrganizerGUI:
-    def __init__(self):
-        self.tree = AnimalTree()
-        DataLoader.load_animals("animals.csv", self.tree)
-        self.window = tk.Tk()
-        self.window.title("Animal Organizer")
-
-        self.label = tk.Label(self.window, text="Enter Animal Name:")
-        self.label.pack()
+class TreeVisualizer:
+    def __init__(self, tree):
+        self.tree = tree
+        self.root = tk.Tk()
+        self.root.title("Binary Tree Visualizer")
         
-        self.entry = tk.Entry(self.window)
-        self.entry.pack()
+        btn_show = tk.Button(self.root, text="Show Tree", command=self.display_tree)
+        btn_show.pack(pady=20)
+        
+        self.root.mainloop()
+    
+    def add_edges(self, graph, node, pos, x=0, y=0, layer=1):
+        if node is not None:
+            graph.add_node(node.animal.name, label=node.animal.name)
+            pos[node.animal.name] = (x, -y)
+            
+            if node.left:
+                graph.add_edge(node.animal.name, node.left.animal.name)
+                self.add_edges(graph, node.left, pos, x - 1 / (layer + 1), y + 1, layer + 1)
+            
+            if node.right:
+                graph.add_edge(node.animal.name, node.right.animal.name)
+                self.add_edges(graph, node.right, pos, x + 1 / (layer + 1), y + 1, layer + 1)
+    
+    def display_tree(self):
+        if self.tree.root is None:
+            messagebox.showerror("Error", "Tree is empty!")
+            return
+        
+        graph = nx.DiGraph()
+        pos = {}
+        self.add_edges(graph, self.tree.root, pos)
+        
+        labels = {node: node for node in graph.nodes()}
+        plt.figure(figsize=(12, 8))
+        nx.draw(graph, pos, labels=labels, with_labels=True, node_size=3500, node_color="lightgreen", font_size=10, font_weight="bold", edge_color="black")
+        plt.title("Animal Binary Tree Structure")
+        plt.show()
 
-        self.search_button = tk.Button(self.window, text="Search", command=self.search_animal)
-        self.search_button.pack()
-
-    def search_animal(self):
-        name = self.entry.get()
-        animal = self.tree.search(name)
-        messagebox.showinfo("Search Result", str(animal) if animal else "Animal not found.")
-
-    def run(self):
-        self.window.mainloop()
+if __name__ == "__main__":
+    from animal_organizer.data_loader import load_animals_from_csv
+    
+    animal_tree = AnimalTree()
+    load_animals_from_csv("animals.csv", animal_tree)
+    TreeVisualizer(animal_tree)
